@@ -31,6 +31,8 @@ namespace MyBookCollection.WebApi
         {
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
             services.AddControllers();
+                //.AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddTransient<IBookRepository, BookRepository>();
             services.AddSwaggerGen(c =>
             {
@@ -41,7 +43,7 @@ namespace MyBookCollection.WebApi
                     Description = "A rest api for my book collection."
                 });
             });
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

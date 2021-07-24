@@ -47,7 +47,8 @@ namespace MyBookCollection.WebApi.Repository
 
         public async Task<IEnumerable<Book>> GetBooks()
         {
-            var books = await context.Books.ToListAsync();
+            var books = await context.Books.Include(x=> x.Characters).Include(x=>x.BookType).Include(x=>x.Publisher).Include(x=>x.Authors)
+                .ToListAsync();
             return books;
         }
 
