@@ -18,7 +18,9 @@ jobs:
       with:
         dotnet-version: 3.1.x
     - name: Display current directory and move to solution folder
-      run: pwd | ls | cd MyBookCollection
+      run: pwd | ls
+    - name: move to solution directory
+      run: cd MyBookCollection
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
