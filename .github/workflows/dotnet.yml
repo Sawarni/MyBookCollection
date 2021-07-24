@@ -1,0 +1,29 @@
+name: Build my book collection
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: move to solution directory
+      run: cd MyBookCollection
+    - name: Display current directory and move to solution folder
+      run: pwd | ls
+    - name: Restore dependencies
+      run: dotnet restore MyBookCollection/
+    - name: Build
+      run: dotnet build MyBookCollection/ --no-restore
+  #  - name: Test
+  #    run: dotnet test --no-build --verbosity normal
