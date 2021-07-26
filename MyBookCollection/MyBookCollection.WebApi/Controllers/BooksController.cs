@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MyBookCollection.Models;
 using MyBookCollection.WebApi.Repository;
 using System;
 using System.Collections.Generic;

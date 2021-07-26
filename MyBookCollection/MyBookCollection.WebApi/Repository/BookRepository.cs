@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MyBookCollection.Models;
 using MyBookCollection.WebApi.Database;
+using MyBookCollection.WebApi.DomainEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +47,8 @@ namespace MyBookCollection.WebApi.Repository
 
         public async Task<IEnumerable<Book>> GetBooks()
         {
-            var books = await context.Books.Include(x=> x.Characters).Include(x=>x.BookType).Include(x=>x.Publisher).Include(x=>x.Authors)
+            var books = await context.Books
+                //.Include(x=> x.Characters).Include(x=>x.BookType).Include(x=>x.Publisher).Include(x=>x.Authors)
                 .ToListAsync();
             return books;
         }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyBookCollection.Models;
+using MyBookCollection.WebApi.DomainEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

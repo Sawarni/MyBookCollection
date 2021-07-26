@@ -18,5 +18,9 @@
     <ProjectReference Include="..\MyBookCollection.Models\MyBookCollection.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DomainEntities\" />
+  </ItemGroup>
+
 
 </Project>
