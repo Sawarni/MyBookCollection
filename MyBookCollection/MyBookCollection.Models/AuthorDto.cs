@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyBookCollection.Models
 {
-    public class Author : AuditableBase
+    public class AuthorDto : AuditableBase
     {
         [Key]
         [Required]
@@ -12,6 +12,6 @@ namespace MyBookCollection.Models
         [Required]
         public string AuthorName { get; set; }
 
-        public List<Book> Books { get; set; }
+        //public List<BookDto> Books { get; set; }
     }
 }

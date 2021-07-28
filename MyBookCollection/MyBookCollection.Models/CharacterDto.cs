@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyBookCollection.Models
 {
-    public class Character : AuditableBase
+    public class CharacterDto : AuditableBase
     {
         [Key]
         public int CharacterId { get; set; }
@@ -12,7 +12,7 @@ namespace MyBookCollection.Models
         public string CharacterName { get; set; }
 
 
-        public List<Book> Books { get; set; }
+        //public List<BookDto> Books { get; set; }
 
     }
 

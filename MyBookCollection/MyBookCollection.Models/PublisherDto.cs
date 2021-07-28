@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyBookCollection.Models
 {
-    public class Publisher : AuditableBase
+    public class PublisherDto : AuditableBase
     {
         [Key]
         public int PublisherId { get; set; }
 
-        public string PiublisherName { get; set; }
+        public string PublisherName { get; set; }
 
-        public List<Book> Books { get; set; }
+        //public List<BookDto> Books { get; set; }
     }
 }

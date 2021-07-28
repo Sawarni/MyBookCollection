@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyBookCollection.Models
 {
-    public class Book : AuditableBase
+    public class BookDto : AuditableBase
     {
         [Required]
         [Key]
@@ -19,13 +19,13 @@ namespace MyBookCollection.Models
         public int BookTypeId { get; set; }
 
 
-        public List<Character> Characters { get; set; }
+        public List<CharacterDto> Characters { get; set; }
 
-        public List<Author> Authors { get; set; }
+        public List<AuthorDto> Authors { get; set; }
 
-        public Publisher Publisher { get; set; }
+        public PublisherDto Publisher { get; set; }
 
-        public BookType BookType { get; set; }
+        public BookTypeDto BookType { get; set; }
 
 
 

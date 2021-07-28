@@ -31,8 +31,8 @@ namespace MyBookCollection.WebApi
         {
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
             services.AddControllers();
-                //.AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+            //.AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IBookRepository, BookRepository>();
             services.AddSwaggerGen(c =>
             {

@@ -22,7 +22,7 @@ namespace MyBookCollection.WebApi.Repository
         public async Task<Book> AddBook(Book book)
         {
             context.Add(book);
-            var result = await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return book;
         }
 
@@ -48,7 +48,7 @@ namespace MyBookCollection.WebApi.Repository
         public async Task<IEnumerable<Book>> GetBooks()
         {
             var books = await context.Books
-                //.Include(x=> x.Characters).Include(x=>x.BookType).Include(x=>x.Publisher).Include(x=>x.Authors)
+                .Include(x=> x.Characters).Include(x=>x.BookType).Include(x=>x.Publisher).Include(x=>x.Authors)
                 .ToListAsync();
             return books;
         }

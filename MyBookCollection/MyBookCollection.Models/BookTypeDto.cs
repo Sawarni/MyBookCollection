@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyBookCollection.Models
 {
-    public class BookType : AuditableBase
+    public class BookTypeDto : AuditableBase
     {
         [Key]
         public int BookTypeId { get; set; }
@@ -13,7 +13,7 @@ namespace MyBookCollection.Models
         [Required]
         public string BookTypeName { get; set; }
 
-        public List<Book> Books { get; set; }
+       // public List<BookDto> Books { get; set; }
 
     }
 }
