@@ -55,4 +55,12 @@ namespace MyBookCollection.WebApi.MappingProfiles
 
     }
 
+    public class ImageFileProfile:Profile
+    {
+        public ImageFileProfile()
+        {
+            CreateMap<ImageFile, ImageFileDto>();
+        }
+    }
+
 }

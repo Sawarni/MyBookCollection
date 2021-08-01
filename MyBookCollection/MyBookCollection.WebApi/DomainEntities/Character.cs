@@ -14,6 +14,10 @@ namespace MyBookCollection.WebApi.DomainEntities
 
         public List<Book> Books { get; set; }
 
+
+        public ImageFile CharacterImage { get; set; }
+
+        
     }
 
 

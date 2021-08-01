@@ -28,8 +28,8 @@ namespace MyBookCollection.WebApi.Repository
 
         public async Task<bool> DeleteBook(int id)
         {
-            var book = await context.Books.FindAsync( id);
-            if(book != null)
+            var book = await context.Books.FindAsync(id);
+            if (book != null)
             {
                 context.Books.Remove(book);
                 var result = await context.SaveChangesAsync();
@@ -48,20 +48,20 @@ namespace MyBookCollection.WebApi.Repository
         public async Task<IEnumerable<Book>> GetBooks()
         {
             var books = await context.Books
-                .Include(x=> x.Characters).Include(x=>x.BookType).Include(x=>x.Publisher).Include(x=>x.Authors)
+                .Include(x => x.Characters).Include(x => x.BookType).Include(x => x.Publisher).Include(x => x.Authors)
                 .ToListAsync();
             return books;
         }
 
         public async Task<IEnumerable<Book>> SearchBooks(string bookName)
         {
-            var books =  context.Books.Where(x=>x.BookName.Contains(bookName));
+            var books = context.Books.Where(x => x.BookName.Contains(bookName));
             return await books.ToListAsync();
         }
 
         public async Task<Book> UpdateBook(Book book)
         {
-            await context.Books.AddAsync(book);
+            context.Books.Attach(book);
             await context.SaveChangesAsync();
             return book;
         }

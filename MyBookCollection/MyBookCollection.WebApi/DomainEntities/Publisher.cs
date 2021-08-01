@@ -8,7 +8,7 @@ namespace MyBookCollection.WebApi.DomainEntities
         [Key]
         public int PublisherId { get; set; }
 
-        public string PiublisherName { get; set; }
+        public string PublisherName { get; set; }
 
         public List<Book> Books { get; set; }
     }

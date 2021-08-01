@@ -27,7 +27,9 @@ namespace MyBookCollection.WebApi.DomainEntities
 
         public BookType BookType { get; set; }
 
+        public ImageFile BookImage { get; set; }
 
+        
 
 
     }

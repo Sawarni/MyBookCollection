@@ -23,5 +23,7 @@ namespace MyBookCollection.WebApi.Database
         public DbSet<Character> Characters { get; set; }
 
         public DbSet<Publisher> Publishers { get; set; }
+
+        public DbSet<ImageFile> ImageFiles { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace MyBookCollection.Models
         [Required]
         public string CharacterName { get; set; }
 
+        public ImageFileDto ImageFile { get; set; }
 
         //public List<BookDto> Books { get; set; }
 

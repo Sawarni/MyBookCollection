@@ -1,0 +1,57 @@
+﻿@page "/characters"
+@inherits CharactersBase
+
+
+@if (Characters == null)
+{
+    <LoadingIndicator></LoadingIndicator>
+}
+else
+{
+    
+
+    @*<EditForm Model="@Character">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label for="name"> Name </label>
+                </div>
+                <div class="col-sm-4">
+                    <InputText id="name" class="form-control" @bind-Value="Character.CharacterName"></InputText>
+                </div>
+                <div class="col-sm-4">
+                    <input type="file" class="form-control-file" @bind-value="Character.ImageFile.ImageFileName" />
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn-info">Save</button>
+                </div>
+            </div>
+        </div>
+</EditForm>*@
+
+
+
+    <div class="card-deck">
+        @foreach (var character in Characters)
+        {
+            <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+                <div class="card-header">
+                    <h3>@character.CharacterName</h3>
+                </div>
+
+
+                @if (character.ImageFile == null)
+                {
+                    <img src="Images/AnonymousUser.png" class="card-img-top characterImage" />
+                }
+                else
+                {
+                    <img class="card-img-top characterImage" src="@character.ImageFile.ImageType,@character.ImageFile.ImageBase64" />
+                }
+
+
+            </div>
+        }
+    </div>
+
+}

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyBookCollection.WebApi.Database;
 
 namespace MyBookCollection.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210729070903_UpdatedDatabase")]
+    partial class UpdatedDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,6 +102,9 @@ namespace MyBookCollection.WebApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PublisherId")
                         .HasColumnType("int");
 
@@ -155,7 +160,7 @@ namespace MyBookCollection.WebApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CharacterImageImageId")
+                    b.Property<int?>("BookImageImageId")
                         .HasColumnType("int");
 
                     b.Property<string>("CharacterName")
@@ -168,6 +173,9 @@ namespace MyBookCollection.WebApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -176,7 +184,7 @@ namespace MyBookCollection.WebApi.Migrations
 
                     b.HasKey("CharacterId");
 
-                    b.HasIndex("CharacterImageImageId");
+                    b.HasIndex("BookImageImageId");
 
                     b.ToTable("Characters");
                 });
@@ -198,7 +206,7 @@ namespace MyBookCollection.WebApi.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.ToTable("ImageFiles");
+                    b.ToTable("ImageFile");
                 });
 
             modelBuilder.Entity("MyBookCollection.WebApi.DomainEntities.Publisher", b =>
@@ -214,7 +222,7 @@ namespace MyBookCollection.WebApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PublisherName")
+                    b.Property<string>("PiublisherName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -285,11 +293,11 @@ namespace MyBookCollection.WebApi.Migrations
 
             modelBuilder.Entity("MyBookCollection.WebApi.DomainEntities.Character", b =>
                 {
-                    b.HasOne("MyBookCollection.WebApi.DomainEntities.ImageFile", "CharacterImage")
+                    b.HasOne("MyBookCollection.WebApi.DomainEntities.ImageFile", "BookImage")
                         .WithMany()
-                        .HasForeignKey("CharacterImageImageId");
+                        .HasForeignKey("BookImageImageId");
 
-                    b.Navigation("CharacterImage");
+                    b.Navigation("BookImage");
                 });
 
             modelBuilder.Entity("MyBookCollection.WebApi.DomainEntities.BookType", b =>

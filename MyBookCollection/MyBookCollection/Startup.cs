@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MyBookCollection.Data;
+using MyBookCollection.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,11 @@ namespace MyBookCollection
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddHttpClient<ICharacterService, CharacterService>(client =>
+                        {
+                            client.BaseAddress = new Uri("https://localhost:44303");
+                        }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

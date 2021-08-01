@@ -34,6 +34,7 @@ namespace MyBookCollection.WebApi
             //.AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<ICharacterRepository, CharacterRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
