@@ -21,6 +21,8 @@ namespace MyBookCollection.Models
         {
             get
             {
+                if (ImageContent == null)
+                    return null;
                return Convert.ToBase64String(ImageContent);
             }
         }

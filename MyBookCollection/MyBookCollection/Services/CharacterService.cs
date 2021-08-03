@@ -18,10 +18,31 @@ namespace MyBookCollection.Services
             this.logger = logger;
             this.httpClient = httpClient;
         }
+
+        public async Task<CharacterDto> GetCharacterById(int id)
+        {
+            var data = await httpClient.GetJsonAsync<CharacterDto>($"characters/{id}");
+            return data;
+        }
+
         public async Task<IEnumerable<CharacterDto>> GetCharacters()
         {
             var data = await httpClient.GetJsonAsync<CharacterDto[]>("characters");
             return data;
+        }
+
+        public async Task<bool> AddUpdateCharacter(CharacterDto characterDto)
+        {
+            if(characterDto.CharacterId > 0)
+            {
+              var result =   await httpClient.PutJsonAsync("characters", characterDto);
+                return result.IsSuccessStatusCode;
+            }
+            else
+            {
+                var result = await httpClient.PostJsonAsync<CharacterDto>("characters", characterDto);
+                return result.IsSuccessStatusCode;
+            }
         }
     }
 }

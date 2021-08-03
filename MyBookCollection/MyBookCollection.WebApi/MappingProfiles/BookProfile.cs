@@ -12,7 +12,7 @@ namespace MyBookCollection.WebApi.MappingProfiles
     {
         public BookProfile()
         {
-            CreateMap<Book, BookDto>();
+            CreateMap<Book, BookDto>().ReverseMap();
         }
 
     }
@@ -21,7 +21,7 @@ namespace MyBookCollection.WebApi.MappingProfiles
     {
         public AuthorProfile()
         {
-            CreateMap<Author, AuthorDto>();
+            CreateMap<Author, AuthorDto>().ReverseMap();
         }
 
     }
@@ -30,7 +30,7 @@ namespace MyBookCollection.WebApi.MappingProfiles
     {
         public BookTypeProfile()
         {
-            CreateMap<BookType, BookTypeDto>();
+            CreateMap<BookType, BookTypeDto>().ReverseMap();
         }
 
     }
@@ -40,7 +40,9 @@ namespace MyBookCollection.WebApi.MappingProfiles
     {
         public CharacterProfile()
         {
-            CreateMap<Character, CharacterDto>();
+            CreateMap<Character, CharacterDto>()
+                .ForMember(x=> x.ImageFile, cfg=> cfg.MapFrom(y=>y.CharacterImage))
+                .ReverseMap();
         }
 
     }
@@ -50,7 +52,7 @@ namespace MyBookCollection.WebApi.MappingProfiles
     {
         public PublisherProfile()
         {
-            CreateMap<Publisher, PublisherDto>();
+            CreateMap<Publisher, PublisherDto>().ReverseMap();
         }
 
     }
@@ -59,7 +61,7 @@ namespace MyBookCollection.WebApi.MappingProfiles
     {
         public ImageFileProfile()
         {
-            CreateMap<ImageFile, ImageFileDto>();
+            CreateMap<ImageFile, ImageFileDto>().ReverseMap();
         }
     }
 
