@@ -31,17 +31,17 @@ namespace MyBookCollection.Services
             return data;
         }
 
-        public async Task<bool> AddUpdateCharacter(CharacterDto characterDto)
+        public async Task<CharacterDto> AddUpdateCharacter(CharacterDto characterDto)
         {
             if(characterDto.CharacterId > 0)
             {
-              var result =   await httpClient.PutJsonAsync("characters", characterDto);
-                return result.IsSuccessStatusCode;
+              var result =   await httpClient.PutJsonAsync<CharacterDto>("characters", characterDto);
+                return result;
             }
             else
             {
                 var result = await httpClient.PostJsonAsync<CharacterDto>("characters", characterDto);
-                return result.IsSuccessStatusCode;
+                return result;
             }
         }
     }

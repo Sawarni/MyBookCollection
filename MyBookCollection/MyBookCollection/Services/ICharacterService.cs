@@ -10,6 +10,6 @@ namespace MyBookCollection.Services
     {
         Task<IEnumerable<CharacterDto>> GetCharacters();
         Task<CharacterDto> GetCharacterById(int id);
-        Task<bool> AddUpdateCharacter(CharacterDto characterDto);
+        Task<CharacterDto> AddUpdateCharacter(CharacterDto characterDto);
     }
 }

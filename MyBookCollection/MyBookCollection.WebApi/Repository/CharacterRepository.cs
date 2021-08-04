@@ -17,6 +17,7 @@ namespace MyBookCollection.WebApi.Repository
         public CharacterRepository(ApplicationDbContext context, ILogger<CharacterRepository> logger)
         {
             this.context = context;
+
             this.logger = logger;
         }
 
@@ -41,8 +42,8 @@ namespace MyBookCollection.WebApi.Repository
 
         public async Task<Character> AddCharacter(Character character)
         {
-            await context.Characters.AddAsync(character);
-            await context.SaveChangesAsync();
+            _ = await context.Characters.AddAsync(character);
+            _ = await context.SaveChangesAsync();
             return character;
         }
 
@@ -53,7 +54,7 @@ namespace MyBookCollection.WebApi.Repository
             {
                 context.Characters.Remove(character);
 
-                await context.SaveChangesAsync();
+                _ = await context.SaveChangesAsync();
                 return true;
             }
 
@@ -62,9 +63,13 @@ namespace MyBookCollection.WebApi.Repository
 
         public async Task<Character> UpdateCharacter(Character character)
         {
-            //var character = await GetCharacterById();
-            context.Characters.Attach(character);
-            await context.SaveChangesAsync();
+            character.UpdatedBy = "smanu";
+            character.UpdatedDate = DateTime.Now;
+
+            
+            context.Characters.Update(character);
+
+            _ = await context.SaveChangesAsync();
             return character;
         }
     }

@@ -8,50 +8,75 @@
 }
 else
 {
-    
+
 
     @*<EditForm Model="@Character">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <label for="name"> Name </label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="name"> Name </label>
+                        </div>
+                        <div class="col-sm-4">
+                            <InputText id="name" class="form-control" @bind-Value="Character.CharacterName"></InputText>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="file" class="form-control-file" @bind-value="Character.ImageFile.ImageFileName" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn-info">Save</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    <InputText id="name" class="form-control" @bind-Value="Character.CharacterName"></InputText>
-                </div>
-                <div class="col-sm-4">
-                    <input type="file" class="form-control-file" @bind-value="Character.ImageFile.ImageFileName" />
-                </div>
-                <div class="col-sm-2">
-                    <button type="button" class="btn-info">Save</button>
-                </div>
-            </div>
-        </div>
-</EditForm>*@
+        </EditForm>*@
 
 
 
     <div class="card-deck">
+        <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+            <div class="card-text">
+                <div class="rounded-circle text-center border justify-content-center" style="height:100px;width:100px">
+                    <NavLink class="nav-link"  @onclick="()=> AddEditClick(new Models.CharacterDto())">
+                        <span class="oi oi-plus justify-content-center" title="Add" aria-hidden="true"></span>
+                    </NavLink>
+                </div>
+            </div>
+        </div>
         @foreach (var character in Characters)
         {
             <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
                 <div class="card-header">
-                    <h3>@character.CharacterName</h3>
+                    <div class="row">
+                        <div class="d-flex justify-content-start col">
+                            @character.CharacterName
+
+                        </div>
+                        <div class="d-flex justify-content-end col">
+                            <a @onclick="()=> AddEditClick(character)" class="justify-content-end btn btn-outline-info rounded">
+                                <span class="oi oi-pencil"></span>
+
+                            </a>
+                            <button type="button" class="btn btn-outline-danger justify-content-end rounded"><span class="oi oi-x"></span></button>
+                        </div>
+                    </div>
+                    
+
+
                 </div>
 
-
-                @if (character.ImageFile == null)
-                {
-                    <img src="Images/AnonymousUser.png" class="card-img-top characterImage" />
-                }
-                else
-                {
-                    <img class="card-img-top characterImage" src="@character.ImageFile.ImageType,@character.ImageFile.ImageBase64" />
-                }
-
+                
+                    @if (character.ImageFile == null)
+                    {
+                        <img src="Images/AnonymousUser.png" class="card-img-top characterImage" />
+                    }
+                    else
+                    {
+                        <img class="card-img-top characterImage" src="@character.ImageFile.ImageType,@character.ImageFile.ImageBase64" />
+                    }
+                
+               
 
             </div>
         }
     </div>
-
+    <AddEditCharacter @ref="AddEditCharacter"  CharacterChanged="HandleCharacterChanged"></AddEditCharacter>
 }

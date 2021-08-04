@@ -12,7 +12,12 @@ namespace MyBookCollection.Pages
 {
     public class AddEditCharacterBase : ComponentBase
     {
+        [Parameter]
         public CharacterDto Character { get; set; }
+
+        protected bool ShowDialog { get; set; }
+
+        protected string Title { get; set; }
 
         [Parameter]
         public string Id { get; set; }
@@ -23,35 +28,60 @@ namespace MyBookCollection.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        [Parameter]
+        public EventCallback<int> CharacterChanged { get; set; }
+
+        public bool IsImageLOading { get; set; }
+
+        protected async Task OnConfirmationChange(bool value)
         {
-            int id = 0;
-            int.TryParse(Id, out id);
+            
+            if (value)
+            {
+                var result = await CharacterService.AddUpdateCharacter(Character);
+                await CharacterChanged.InvokeAsync(result.CharacterId);
+            }
+            else
+                await CharacterChanged.InvokeAsync(0);  // user has canceled the changes.
+            ShowDialog = false;
+        }
+
+        public void ShowModal(CharacterDto character)
+        {
+            Character = character;
+            int id = Character.CharacterId;
+            if (Character.ImageFile == null)
+                Character.ImageFile = new ImageFileDto();
             if (id == 0)
             {
-                Character = new CharacterDto();
-                Character.ImageFile = new ImageFileDto();
+                Title = "Add new character";
             }
             else
             {
-                Character = await CharacterService.GetCharacterById(id);
-                if (Character.ImageFile == null)
-                    Character.ImageFile = new ImageFileDto();
-
+                Title = $"Edit character";
             }
+            ShowDialog = true;
+            StateHasChanged();
         }
 
         protected async Task UploadFileControl(IFileListEntry[] files)
         {
             var file = files.FirstOrDefault();
-            if(file != null)
+            if (file != null)
             {
+                IsImageLOading = true;
+                StateHasChanged();
+                if (Character.ImageFile == null)
+                    Character.ImageFile = new ImageFileDto();
+
                 using (var ms = new MemoryStream())
                 {
                     await file.Data.CopyToAsync(ms);
                     Character.ImageFile.ImageContent = ms.ToArray();
                     Character.ImageFile.ImageFileName = file.Name;
-                    
+                    IsImageLOading = false;
+                    StateHasChanged();
+
                 }
             }
         }
@@ -60,7 +90,7 @@ namespace MyBookCollection.Pages
         {
             var result = CharacterService.AddUpdateCharacter(Character);
 
-            NavigationManager.NavigateTo("characters",true);
+            NavigationManager.NavigateTo("characters");
         }
 
     }

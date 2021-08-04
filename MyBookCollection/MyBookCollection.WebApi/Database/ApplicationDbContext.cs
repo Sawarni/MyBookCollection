@@ -12,6 +12,7 @@ namespace MyBookCollection.WebApi.Database
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
             this.ChangeTracker.LazyLoadingEnabled = false;
+            
         }
 
         public DbSet<Book> Books { get; set; }
