@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label for="uploadpic">Upload picture</label>
                             <BlazorInputFile.InputFile class="form-control-file" OnChange="UploadFileControl"></BlazorInputFile.InputFile>
-                            @if (IsImageLOading)
+                            @if (IsImageLoading)
                             {
                                 <LoadingIndicator></LoadingIndicator>
                             }

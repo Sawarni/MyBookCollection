@@ -28,9 +28,9 @@ namespace MyBookCollection.Pages
             Characters = (await CharacterService.GetCharacters()).ToList();
         }
 
-        protected void AddEditClick(CharacterDto character)
+        protected async Task AddEditClick(CharacterDto character)
         {
-            AddEditCharacter.ShowModal(character);
+           await AddEditCharacter.ShowModal(character);
         }
 
         protected async Task HandleCharacterChanged(int characterId)

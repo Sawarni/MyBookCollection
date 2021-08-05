@@ -31,24 +31,26 @@ namespace MyBookCollection.Pages
         [Parameter]
         public EventCallback<int> CharacterChanged { get; set; }
 
-        public bool IsImageLOading { get; set; }
+        public bool IsImageLoading { get; set; }
 
         protected async Task OnConfirmationChange(bool value)
         {
             
             if (value)
             {
+                IsImageLoading = true;
                 var result = await CharacterService.AddUpdateCharacter(Character);
                 await CharacterChanged.InvokeAsync(result.CharacterId);
+                IsImageLoading = false;
             }
             else
                 await CharacterChanged.InvokeAsync(0);  // user has canceled the changes.
             ShowDialog = false;
         }
 
-        public void ShowModal(CharacterDto character)
+        public async Task ShowModal(CharacterDto character)
         {
-            Character = character;
+            Character = await CharacterService.GetCharacterById(character.CharacterId);
             int id = Character.CharacterId;
             if (Character.ImageFile == null)
                 Character.ImageFile = new ImageFileDto();
@@ -61,7 +63,7 @@ namespace MyBookCollection.Pages
                 Title = $"Edit character";
             }
             ShowDialog = true;
-            StateHasChanged();
+            
         }
 
         protected async Task UploadFileControl(IFileListEntry[] files)
@@ -69,8 +71,8 @@ namespace MyBookCollection.Pages
             var file = files.FirstOrDefault();
             if (file != null)
             {
-                IsImageLOading = true;
-                StateHasChanged();
+                IsImageLoading = true;
+                
                 if (Character.ImageFile == null)
                     Character.ImageFile = new ImageFileDto();
 
@@ -79,19 +81,14 @@ namespace MyBookCollection.Pages
                     await file.Data.CopyToAsync(ms);
                     Character.ImageFile.ImageContent = ms.ToArray();
                     Character.ImageFile.ImageFileName = file.Name;
-                    IsImageLOading = false;
-                    StateHasChanged();
+                    IsImageLoading = false;
+                    
 
                 }
             }
         }
 
-        protected async Task HandleCharacterSave()
-        {
-            var result = CharacterService.AddUpdateCharacter(Character);
-
-            NavigationManager.NavigateTo("characters");
-        }
+       
 
     }
 
