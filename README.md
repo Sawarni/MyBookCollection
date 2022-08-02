@@ -1,4 +1,4 @@
-![Github Workflow Status](https://github.com/github/docs/actions/workflows/dotnet.yml/badge.svg)
+![Github Workflow Status](https://github.com/Sawarni/MyBookCollection/actions/workflows/dotnet.yml/badge.svg)
 # MyBookCollection
 I am fond of books but very bad in keeping them. More than often I buy book, read it and like it but safely store it and forget about where I stored it safely. 
 So I am creating this small project where I can see all my possessions and also where I have kept it.
